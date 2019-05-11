@@ -67,6 +67,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\UI\MenuItem.cs" />
+    <Compile Include="Partials\CloseApplicationDialog.xaml.cs">
+      <DependentUpon>CloseApplicationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partials\LogOverview.xaml.cs">
+      <DependentUpon>LogOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partials\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\DatabaseService.cs" />
+    <Compile Include="Services\IDatabaseService.cs" />
+    <Compile Include="Services\ILogEntriesService.cs" />
+    <Compile Include="Services\LogEntriesService.cs" />
+    <Compile Include="ViewModels\LogOverviewViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +95,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Partials\CloseApplicationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Partials\LogOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Partials\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\LogEntry.cs" />
@@ -108,9 +136,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
