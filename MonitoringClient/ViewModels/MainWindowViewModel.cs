@@ -1,21 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using MonitoringClient.Models.UI;
 using MonitoringClient.Partials;
 
 namespace MonitoringClient.ViewModels
 {
-    public class MainWindowViewModel
+    public interface IMainWindowViewModel
     {
-        public MainWindowViewModel()
+        MenuItem[] MenuItems { get; set; }
+    }
+
+    public class MainWindowViewModel : IMainWindowViewModel
+    {
+        public MainWindowViewModel(IServiceProvider serviceProvider)
         {
             MenuItems = new []
             {
-                new MenuItem("Log Overview", new LogOverview()),
-                new MenuItem("Settings", new Settings())
+                new MenuItem("Log Overview", new LogOverview
+                {
+                    DataContext = serviceProvider.GetRequiredService<ILogOverviewViewModel>()
+                }),
+                new MenuItem("Settings", new Settings
+                {
+                    DataContext = serviceProvider.GetRequiredService<ISettingsViewModel>()
+                })
             };
         }
 

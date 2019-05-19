@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace MonitoringClient.Models.UI
 {
@@ -21,6 +16,7 @@ namespace MonitoringClient.Models.UI
                 OnPropertyChanged("Name");
             }
         }
+
         public object Content
         {
             get { return _content; }

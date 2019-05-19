@@ -1,24 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
+using Microsoft.Extensions.DependencyInjection;
 using MonitoringClient.Models;
+using MonitoringClient.Partials;
+using MonitoringClient.Services;
 
 namespace MonitoringClient.ViewModels
 {
-    public class LogOverviewViewModel
+    public interface ILogOverviewViewModel
     {
-        public LogOverviewViewModel()
+
+    }
+    public class LogOverviewViewModel : ILogOverviewViewModel
+    {
+        private readonly ILogEntriesService _logEntriesService;
+        private readonly IServiceProvider _serviceProvider;
+        private ICommand _refreshLogentriesCommand;
+        private ICommand _clearLogEntryCommand;
+        private ICommand _addLogEntryCommand;
+
+        public LogOverviewViewModel(ILogEntriesService logEntriesService, IServiceProvider serviceProvider)
         {
-            LogEntries = new[]
+            _logEntriesService = logEntriesService;
+            _serviceProvider = serviceProvider;
+
+            LogEntries = new ObservableCollection<LogEntry>
             {
                 new LogEntry
                 {
                     Hostname = "Host1",
                     Id = 123123,
                     Location = "De",
-                    Message = "Test",
+                    Message = "Bitte Connection String in den Settings im Burgermenü hinzufügen",
                     Pod = "137ddd",
                     Severity = 3,
                     Timestamp = DateTime.Today
@@ -28,14 +44,93 @@ namespace MonitoringClient.ViewModels
                     Hostname = "Host2",
                     Id = 12341241,
                     Location = "Fr",
-                    Message = "Test2",
+                    Message = "Bitte Connection String in den Settings im Burgermenü hinzufügen",
                     Pod = "137ffd",
                     Severity = 4,
                     Timestamp = new DateTime(2017,12,26,8,38,12)
                 }
             };
+            SelectedLogEntry = LogEntries.First();
         }
 
-        public LogEntry[] LogEntries { get; set; }
+        private void ClearLogEntry()
+        {
+            if (SelectedLogEntry == null)
+                return;
+
+            _logEntriesService.ClearLogEntry(SelectedLogEntry.Id);
+            RefreshLogEntries();
+        }
+
+        private void RefreshLogEntries()
+        {
+            LogEntries.Clear();
+            foreach (var logEntry in _logEntriesService.GetLogEntries())
+            {
+                LogEntries.Add(logEntry);
+            }
+            
+        }
+
+        private async void AddLogEntry()
+        {
+
+            var dialog = new AddLogEntryDialog
+            {
+                DataContext = _serviceProvider.GetRequiredService<IAddLogEntryDialogViewModel>()
+            };
+
+            var result = await DialogHost.Show(dialog);
+            if (!Equals(result, "0"))
+            {
+                RefreshLogEntries();
+            }
+        }
+
+        public ICommand RefreshLogEntriesCommand
+        {
+            get
+            {
+                if (_clearLogEntryCommand == null)
+                {
+                    _clearLogEntryCommand = new RelayCommand(
+                        p =>true,
+                        p=> RefreshLogEntries());
+                }
+
+                return _clearLogEntryCommand;
+            }
+        }
+
+        public ICommand ClearLogEntryCommand
+        {
+            get
+            {
+                if (_refreshLogentriesCommand == null)
+                {
+                    _refreshLogentriesCommand = new RelayCommand(
+                        p => true,
+                        p => ClearLogEntry());
+                }
+
+                return _refreshLogentriesCommand;
+            }
+        }
+        public ICommand AddLogEntryCommand
+        {
+            get
+            {
+                if (_addLogEntryCommand == null)
+                {
+                    _addLogEntryCommand = new RelayCommand(
+                        p => true,
+                        p => AddLogEntry());
+                }
+
+                return _addLogEntryCommand;
+            }
+        }
+        public ObservableCollection<LogEntry> LogEntries { get; set; }
+        public LogEntry SelectedLogEntry { get; set; }
     }
 }

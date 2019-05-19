@@ -3,11 +3,11 @@
 namespace MonitoringClient.Partials
 {
     /// <summary>
-    /// Interaction logic for LogOverview.xaml
+    /// Interaction logic for AddLogEntryDialog.xaml
     /// </summary>
-    public partial class LogOverview : UserControl
+    public partial class AddLogEntryDialog : UserControl
     {
-        public LogOverview()
+        public AddLogEntryDialog()
         {
             InitializeComponent();
         }

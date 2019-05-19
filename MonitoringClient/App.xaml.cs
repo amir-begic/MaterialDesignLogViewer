@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using MonitoringClient.Services;
+using MonitoringClient.ViewModels;
 
 namespace MonitoringClient
 {
@@ -23,7 +19,18 @@ namespace MonitoringClient
 
             var services = new ServiceCollection();
             services.AddSingleton<IDatabaseService, DatabaseService>();
+            services.AddSingleton<ILogEntriesService, LogEntriesService>();
+            services.AddTransient<IMainWindowViewModel, MainWindowViewModel>();
+            services.AddTransient<ISettingsViewModel, SettingsViewModel>();
+            services.AddTransient<ILogOverviewViewModel, LogOverviewViewModel>();
+            services.AddTransient<IAddLogEntryDialogViewModel, AddLogEntryDialogViewModel>();
             Container = services.BuildServiceProvider();
+
+            var window = new MainWindow
+            {
+                DataContext = Container.GetRequiredService<IMainWindowViewModel>()
+            };
+            window.Show();
         }
 
     }

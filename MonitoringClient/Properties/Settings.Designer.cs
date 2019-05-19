@@ -26,12 +26,12 @@ namespace MonitoringClient.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConnectionString {
+        public string Hostname {
             get {
-                return ((string)(this["ConnectionString"]));
+                return ((string)(this["Hostname"]));
             }
             set {
-                this["ConnectionString"] = value;
+                this["Hostname"] = value;
             }
         }
         
@@ -56,6 +56,18 @@ namespace MonitoringClient.Properties {
             }
             set {
                 this["Username"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Database {
+            get {
+                return ((string)(this["Database"]));
+            }
+            set {
+                this["Database"] = value;
             }
         }
     }

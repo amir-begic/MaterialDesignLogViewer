@@ -14,16 +14,26 @@
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
         <DataGrid
+            Grid.ColumnSpan="3"
             Grid.Row="0"
             Margin="0 8 0 0"
-            ItemsSource="{Binding LogEntries}"
+            ItemsSource="{Binding LogEntries, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedLogEntry, Mode=TwoWay}"
             CanUserSortColumns="True"
             CanUserAddRows="False"
             materialDesign:DataGridAssist.CellPadding="4 2 2 2"
             materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" />
+        <Button x:Name="btnAddLogEntry" Grid.Row="1" Grid.Column="0" Margin="30 0 30 0" Command="{Binding AddLogEntryCommand}"> Add </Button>
+        <Button x:Name="btnClearLogentry"  Grid.Row="1" Grid.Column="1" Margin="30 0 30 0" Command="{Binding ClearLogEntryCommand}"> Clear </Button>
+        <Button x:Name="btnRefreshGrid"  Grid.Row="1" Grid.Column="2" Margin="30 0 30 0" Command="{Binding RefreshLogEntriesCommand}"> Refresh </Button>
     </Grid>
 </UserControl>
