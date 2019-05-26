@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using DuplicateCheckerLib;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using MonitoringClient.Models;
 using MonitoringClient.Partials;
 using MonitoringClient.Services;
+using Org.BouncyCastle.Utilities.Collections;
 
 namespace MonitoringClient.ViewModels
 {
@@ -21,6 +27,7 @@ namespace MonitoringClient.ViewModels
         private ICommand _refreshLogentriesCommand;
         private ICommand _clearLogEntryCommand;
         private ICommand _addLogEntryCommand;
+        private ICommand _showDuplicateEntriesCommand;
 
         public LogOverviewViewModel(ILogEntriesService logEntriesService, IServiceProvider serviceProvider)
         {
@@ -36,7 +43,7 @@ namespace MonitoringClient.ViewModels
                     Location = "De",
                     Message = "Bitte Connection String in den Settings im Burgermenü hinzufügen",
                     Pod = "137ddd",
-                    Severity = 3,
+                    Severity = 4,
                     Timestamp = DateTime.Today
                 },
                 new LogEntry
@@ -50,6 +57,7 @@ namespace MonitoringClient.ViewModels
                     Timestamp = new DateTime(2017,12,26,8,38,12)
                 }
             };
+            
             SelectedLogEntry = LogEntries.First();
         }
 
@@ -87,6 +95,16 @@ namespace MonitoringClient.ViewModels
             }
         }
 
+        private async void ShowDuplicateEntries()
+        {
+            var dialog = new DisplayDuplicateLogEntriesDialog
+            {
+                DataContext = _serviceProvider.GetRequiredService<IDisplayDuplicateLogEntriesDialogViewModel>()
+            };
+
+             var result = await DialogHost.Show(dialog);
+        }
+
         public ICommand RefreshLogEntriesCommand
         {
             get
@@ -99,6 +117,21 @@ namespace MonitoringClient.ViewModels
                 }
 
                 return _clearLogEntryCommand;
+            }
+        }
+
+        public ICommand GetDuplicateEntriesCommand
+        {
+            get
+            {
+                if (_showDuplicateEntriesCommand == null)
+                {
+                    _showDuplicateEntriesCommand = new RelayCommand(
+                        p => true,
+                        p => ShowDuplicateEntries());
+                }
+
+                return _showDuplicateEntriesCommand;
             }
         }
 

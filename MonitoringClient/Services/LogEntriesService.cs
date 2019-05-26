@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
+using System.Net.Http.Headers;
 using System.Windows;
+using DuplicateCheckerLib;
 using MonitoringClient.Models;
 
 namespace MonitoringClient.Services
@@ -9,10 +14,12 @@ namespace MonitoringClient.Services
     public class LogEntriesService : ILogEntriesService
     {
         private readonly IDatabaseService _databaseService;
+        private readonly DuplicateChecker _duplicateChecker;
 
         public LogEntriesService(IDatabaseService databaseService)
         {
             _databaseService = databaseService;
+            _duplicateChecker = new DuplicateChecker();
         }
         public void ClearLogEntry(int id)
         {
@@ -34,6 +41,20 @@ namespace MonitoringClient.Services
                 Console.WriteLine(e.Message);
                 MessageBox.Show(e.Message);
             }
+        }
+
+        public ObservableCollection<IEntity> GetDuplicateLogEntries()
+        {
+            var logEntries = GetLogEntries();
+            var duplicateLogEntries = new ObservableCollection<IEntity>();
+
+            var dups = _duplicateChecker.FindDuplicates(logEntries);
+            foreach (var t in dups)
+            {
+                duplicateLogEntries.Add(t);
+            }
+
+            return duplicateLogEntries;
         }
 
         public ObservableCollection<LogEntry> GetLogEntries()

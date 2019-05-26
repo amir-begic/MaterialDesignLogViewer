@@ -41,6 +41,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="DuplicateCheckerLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DuplicateCheckerLib.1.0.0\lib\netstandard2.0\DuplicateCheckerLib.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -83,6 +86,9 @@
     <Compile Include="Partials\CloseApplicationDialog.xaml.cs">
       <DependentUpon>CloseApplicationDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Partials\DisplayDuplicateLogEntriesDialog.xaml.cs">
+      <DependentUpon>DisplayDuplicateLogEntriesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Partials\LogOverview.xaml.cs">
       <DependentUpon>LogOverview.xaml</DependentUpon>
     </Compile>
@@ -98,6 +104,7 @@
     <Compile Include="Services\LogEntriesService.cs" />
     <Compile Include="Exceptions\MissingSettingException.cs" />
     <Compile Include="ViewModels\AddLogEntryDialogViewModel.cs" />
+    <Compile Include="ViewModels\DisplayDuplicateLogEntriesDialogViewModel.cs" />
     <Compile Include="ViewModels\LogOverviewViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MenuGridViewModel.cs" />
@@ -119,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Partials\CloseApplicationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Partials\DisplayDuplicateLogEntriesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

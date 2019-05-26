@@ -13,8 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DuplicateCheckerLib;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MonitoringClient.Services;
 using MonitoringClient.ViewModels;
 
@@ -36,6 +38,8 @@ namespace MonitoringClient.Partials
             services.AddTransient<ISettingsViewModel, SettingsViewModel>();
             services.AddTransient<ILogOverviewViewModel, LogOverviewViewModel>();
             services.AddTransient<IAddLogEntryDialogViewModel, AddLogEntryDialogViewModel>();
+            services
+                .AddTransient<IDisplayDuplicateLogEntriesDialogViewModel, DisplayDuplicateLogEntriesDialogViewModel>();
             services.AddTransient<IMenuGridViewModel, MenuGridViewModel>();
             Container = services.BuildServiceProvider();
 
