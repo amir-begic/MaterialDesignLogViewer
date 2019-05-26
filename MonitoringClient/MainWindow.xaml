@@ -6,69 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:MonitoringClient"
         xmlns:ui="clr-namespace:MonitoringClient.Models.UI"
+        xmlns:partials="clr-namespace:MonitoringClient.Partials"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.FontWeight="Medium"
-        TextElement.FontSize="14"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 >
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+<partials:MenuGrid></partials:MenuGrid>
 
-    <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
-        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
-            <materialDesign:DrawerHost.LeftDrawerContent>
-                <DockPanel MinWidth="212">
-                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
-                                    DockPanel.Dock="Top"
-                                    HorizontalAlignment="Right" Margin="16"
-                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
-                    <ListBox x:Name="MenuItemsListBox" Margin="0 16 0 16" SelectedIndex="0"                         
-                             ItemsSource="{Binding MenuItems}"
-                             PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="ui:MenuItem">
-                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </DockPanel>
-            </materialDesign:DrawerHost.LeftDrawerContent>
-            <DockPanel>
-                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                            Mode="PrimaryMid" DockPanel.Dock="Top">
-                    <DockPanel>
-                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
-                                        x:Name="MenuToggleButton"/>
-                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                            <StackPanel>
-                                <Button Content="Goodbye" Click="CloseApplicationButton_OnClick"/>
-                            </StackPanel>
-                        </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">SQL Monitoring Client</TextBlock>
-                    </DockPanel>
-                </materialDesign:ColorZone>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <ScrollViewer Grid.Row="1" 
-                                  HorizontalScrollBarVisibility="Auto"
-                                  VerticalScrollBarVisibility="Auto">
-                        <ContentControl Content="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.Content}" />
-                    </ScrollViewer>
-                </Grid>
-            </DockPanel>
-        </materialDesign:DrawerHost>
-    </materialDesign:DialogHost>
 </Window>

@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -83,6 +86,9 @@
     <Compile Include="Partials\LogOverview.xaml.cs">
       <DependentUpon>LogOverview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Partials\MenuGrid.xaml.cs">
+      <DependentUpon>MenuGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Partials\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -94,6 +100,7 @@
     <Compile Include="ViewModels\AddLogEntryDialogViewModel.cs" />
     <Compile Include="ViewModels\LogOverviewViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MenuGridViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Partials\LogOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Partials\MenuGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
