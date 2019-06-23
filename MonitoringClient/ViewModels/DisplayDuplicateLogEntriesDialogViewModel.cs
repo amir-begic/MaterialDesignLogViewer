@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DuplicateCheckerLib;
 using MonitoringClient.Models;
 using MonitoringClient.Services;
+using MonitoringClient.Services.RepositoryServices;
 
 namespace MonitoringClient.ViewModels
 {
@@ -16,10 +17,10 @@ namespace MonitoringClient.ViewModels
     }
     public class DisplayDuplicateLogEntriesDialogViewModel : IDisplayDuplicateLogEntriesDialogViewModel
     {
-        private readonly ILogEntriesService _logEntriesService;
-        public DisplayDuplicateLogEntriesDialogViewModel(ILogEntriesService logEntriesService)
+        private readonly IRepositoryBase<LogEntry> _loggingRepository;
+        public DisplayDuplicateLogEntriesDialogViewModel(IRepositoryBase<LogEntry> loggingRepository)
         {
-            _logEntriesService = logEntriesService;
+            _loggingRepository = loggingRepository;
             LogEntries = new ObservableCollection<IEntity>();
             GetDuplicateLogEntries();
         }
@@ -27,7 +28,7 @@ namespace MonitoringClient.ViewModels
         private void GetDuplicateLogEntries()
         {
 
-            var logentries = _logEntriesService.GetDuplicateLogEntries();
+            var logentries = _loggingRepository.GetDuplicateLogEntries();
             foreach (var logentry in logentries)
             {
                 if (logentry!=null)

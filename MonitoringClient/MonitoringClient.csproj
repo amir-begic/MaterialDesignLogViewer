@@ -78,6 +78,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\UI\MenuItem.cs" />
     <Compile Include="Partials\AddLogEntryDialog.xaml.cs">
@@ -101,8 +103,12 @@
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\IDatabaseService.cs" />
     <Compile Include="Services\ILogEntriesService.cs" />
+    <Compile Include="Services\RepositoryServices\IRepositoryBase.cs" />
     <Compile Include="Services\LogEntriesService.cs" />
     <Compile Include="Exceptions\MissingSettingException.cs" />
+    <Compile Include="Services\RepositoryServices\LocationRepository.cs" />
+    <Compile Include="Services\RepositoryServices\LoggingRepository.cs" />
+    <Compile Include="Services\RepositoryServices\RepositoryBase.cs" />
     <Compile Include="ViewModels\AddLogEntryDialogViewModel.cs" />
     <Compile Include="ViewModels\DisplayDuplicateLogEntriesDialogViewModel.cs" />
     <Compile Include="ViewModels\LogOverviewViewModel.cs" />

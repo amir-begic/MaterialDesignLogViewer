@@ -4,18 +4,8 @@ using DuplicateCheckerLib;
 
 namespace MonitoringClient.Models
 {
-    public class LogEntry : INotifyPropertyChanged, IEntity
+    public class LogEntry : BaseModel, IEntity
     {
-
-        private int _id;
-        public int Id {
-            get => _id;
-            set
-            {
-                _id = value;
-                OnPropertyChanged("Id");
-            }
-        }
 
         private string _pod;
 
@@ -84,13 +74,6 @@ namespace MonitoringClient.Models
                 _message = value;
                 OnPropertyChanged("Message");
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         private bool Equals(LogEntry le)

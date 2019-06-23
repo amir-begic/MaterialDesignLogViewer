@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using DuplicateCheckerLib;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using MonitoringClient.Models;
 using MonitoringClient.Partials;
 using MonitoringClient.Services;
-using Org.BouncyCastle.Utilities.Collections;
+using MonitoringClient.Services.RepositoryServices;
 
 namespace MonitoringClient.ViewModels
 {
@@ -22,16 +19,16 @@ namespace MonitoringClient.ViewModels
     }
     public class LogOverviewViewModel : ILogOverviewViewModel
     {
-        private readonly ILogEntriesService _logEntriesService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IRepositoryBase<LogEntry> _loggingRepository;
         private ICommand _refreshLogentriesCommand;
         private ICommand _clearLogEntryCommand;
         private ICommand _addLogEntryCommand;
         private ICommand _showDuplicateEntriesCommand;
 
-        public LogOverviewViewModel(ILogEntriesService logEntriesService, IServiceProvider serviceProvider)
+        public LogOverviewViewModel(IServiceProvider serviceProvider, IRepositoryBase<LogEntry> loggingRepository)
         {
-            _logEntriesService = logEntriesService;
+            _loggingRepository = loggingRepository;
             _serviceProvider = serviceProvider;
 
             LogEntries = new ObservableCollection<LogEntry>
@@ -66,14 +63,14 @@ namespace MonitoringClient.ViewModels
             if (SelectedLogEntry == null)
                 return;
 
-            _logEntriesService.ClearLogEntry(SelectedLogEntry.Id);
+            _loggingRepository.ClearByProcedure(SelectedLogEntry.Id);
             RefreshLogEntries();
         }
 
         private void RefreshLogEntries()
         {
             LogEntries.Clear();
-            foreach (var logEntry in _logEntriesService.GetLogEntries())
+            foreach (var logEntry in _loggingRepository.GetAll())
             {
                 LogEntries.Add(logEntry);
             }

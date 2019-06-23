@@ -27,26 +27,12 @@ namespace MonitoringClient.Partials
     /// </summary>
     public partial class MenuGrid : UserControl
     {
-        public static IServiceProvider Container { get; private set; }
         public MenuGrid()
         {
-
-            var services = new ServiceCollection();
-            services.AddSingleton<IDatabaseService, DatabaseService>();
-            services.AddSingleton<ILogEntriesService, LogEntriesService>();
-            services.AddTransient<IMainWindowViewModel, MainWindowViewModel>();
-            services.AddTransient<ISettingsViewModel, SettingsViewModel>();
-            services.AddTransient<ILogOverviewViewModel, LogOverviewViewModel>();
-            services.AddTransient<IAddLogEntryDialogViewModel, AddLogEntryDialogViewModel>();
-            services
-                .AddTransient<IDisplayDuplicateLogEntriesDialogViewModel, DisplayDuplicateLogEntriesDialogViewModel>();
-            services.AddTransient<IMenuGridViewModel, MenuGridViewModel>();
-            Container = services.BuildServiceProvider();
-
             InitializeComponent();
 
 
-            DataContext = Container.GetRequiredService<IMenuGridViewModel>();
+            DataContext = new MenuGridViewModel();
         }
 
 

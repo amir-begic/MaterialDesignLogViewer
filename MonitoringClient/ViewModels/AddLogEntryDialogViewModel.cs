@@ -3,6 +3,7 @@ using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using MonitoringClient.Models;
 using MonitoringClient.Services;
+using MonitoringClient.Services.RepositoryServices;
 
 namespace MonitoringClient.ViewModels
 {
@@ -14,11 +15,11 @@ namespace MonitoringClient.ViewModels
     {
 
         private ICommand _addLogEntryCommand;
-        private readonly ILogEntriesService _logEntriesService;
+        private readonly IRepositoryBase<LogEntry> _loggingRepository;
 
-        public AddLogEntryDialogViewModel(ILogEntriesService logEntriesService)
+        public AddLogEntryDialogViewModel(IRepositoryBase<LogEntry> loggingRepository)
         {
-            _logEntriesService = logEntriesService;
+            _loggingRepository = loggingRepository;
             NewLogEntry = new LogEntry
             {
                 Timestamp = DateTime.Now
@@ -27,7 +28,7 @@ namespace MonitoringClient.ViewModels
 
         private void AddLogEntry()
         {
-            _logEntriesService.LogMessageAdd(NewLogEntry);
+            _loggingRepository.AddByProcedure(NewLogEntry);
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
