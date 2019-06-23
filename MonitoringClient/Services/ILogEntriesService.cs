@@ -11,6 +11,6 @@ namespace MonitoringClient.Services
         ObservableCollection<LogEntry> GetLogEntries();
         void LogMessageAdd(LogEntry logEntry);
         void ClearLogEntry(int id);
-        ObservableCollection<IEntity> GetDuplicateLogEntries();
+        ObservableCollection<LogEntry> GetDuplicateLogEntries();
     }
 }

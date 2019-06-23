@@ -43,12 +43,12 @@ namespace MonitoringClient.Services
             }
         }
 
-        public ObservableCollection<IEntity> GetDuplicateLogEntries()
+        public ObservableCollection<LogEntry> GetDuplicateLogEntries()
         {
             var logEntries = GetLogEntries();
-            var duplicateLogEntries = new ObservableCollection<IEntity>();
+            var duplicateLogEntries = new ObservableCollection<LogEntry>();
 
-            var dups = _duplicateChecker.FindDuplicates(logEntries);
+            var dups = _duplicateChecker.FindDuplicates(logEntries).Where(x => x is LogEntry).Cast<LogEntry>();
             foreach (var t in dups)
             {
                 duplicateLogEntries.Add(t);
