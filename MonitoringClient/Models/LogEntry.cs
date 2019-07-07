@@ -1,14 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using DuplicateCheckerLib;
+using LinqToDB.Mapping;
 
 namespace MonitoringClient.Models
 {
-    public class LogEntry : BaseModel, IEntity
+    [Table("v_logentries")]
+    public class LogEntry : BaseModel
     {
-
+            
         private string _pod;
-
+        [Column("pod")]
         public string Pod
         {
             get => _pod;
@@ -20,7 +22,7 @@ namespace MonitoringClient.Models
         }
 
         private string _location;
-
+        [Column("location")]
         public string Location
         {
             get => _location;
@@ -32,6 +34,7 @@ namespace MonitoringClient.Models
         }
 
         private string _hostname;
+        [Column("hostname")]
         public string Hostname
         {
             get => _hostname;
@@ -43,6 +46,7 @@ namespace MonitoringClient.Models
         }
 
         private int _severity;
+        [Column("severity")]
         public int Severity
         {
             get => _severity;
@@ -54,6 +58,7 @@ namespace MonitoringClient.Models
         }
 
         private DateTime _timestamp;
+        [Column("timestamp")]
         public DateTime Timestamp
         {
             get => _timestamp;
@@ -65,7 +70,7 @@ namespace MonitoringClient.Models
         }
 
         private string _message;
-
+        [Column("message")]
         public string Message
         {
             get => _message;

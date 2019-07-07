@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace MonitoringClient.Services.RepositoryServices
 {
@@ -44,15 +46,15 @@ namespace MonitoringClient.Services.RepositoryServices
         /// <param name="parameterValues">Parameter-Werte für die Wherebedingung
         /// bspw: {{"netPrice", 10.5}, {"active", true}, {"desc", "Wolle%"}}</param>
         /// <returns></returns>
-        List<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues);
+        IQueryable<M> GetAll(Expression<Func<M, bool>> whereCondition);
 
         /// <summary>
         /// Gibt eine Liste aller in der DB vorhandenen Model-Objekte vom Typ M zurück
         /// </summary>
         /// <returns></returns>
-        List<M> GetAll();
+        IQueryable<M> GetAll();
 
-        IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues);
+        IQueryable<M> Query(Expression<Func<M, bool>> whereCondition);
 
         /// <summary>
         /// Zählt in der Datenbank die Anzahl Model-Objekte vom Typ M, die der
@@ -63,7 +65,7 @@ namespace MonitoringClient.Services.RepositoryServices
         /// <param name="parameterValues">Parameter-Werte für die Wherebedingung
         /// bspw: {{"netPrice", 10.5}, {"active", true}, {"desc", "Wolle%"}}</param>
         /// <returns></returns>
-        long Count(string whereCondition, Dictionary<string, object> parameterValues);
+        long Count(Expression<Func<M, bool>> whereCondition);
 
         /// <summary>
         /// Zählt alle Model-Objekte vom Typ M
@@ -73,7 +75,7 @@ namespace MonitoringClient.Services.RepositoryServices
 
         void AddByProcedure(M entity);
         void ClearByProcedure<P>(P pkValue);
-        List<M> GetDuplicateLogEntries();
+        IQueryable<M> GetDuplicateLogEntries();
         /// <summary>
         /// Gibt den Tabellennamen zurück, auf die sich das Repository bezieht
         /// </summary>

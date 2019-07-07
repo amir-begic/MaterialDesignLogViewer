@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Windows;
+using DuplicateCheckerLib;
+using LinqToDB;
 using MonitoringClient.Models;
 
 namespace MonitoringClient.Services.RepositoryServices
 {
-    public class RepositoryBase<M> : IRepositoryBase<M>
+    public class RepositoryBase<M> : IRepositoryBase<M> where M : BaseModel, new()
     {
 
-        protected readonly IDatabaseService _databaseService;
+        protected readonly IDatabaseService<M> _databaseService;
+        protected readonly DuplicateChecker _duplicateChecker;
 
-        protected RepositoryBase(IDatabaseService databaseService)
+        protected RepositoryBase(IDatabaseService<M> databaseService)
         {
             _databaseService = databaseService;
+            _duplicateChecker = new DuplicateChecker();
         }
-
+        public virtual string TableName => "";
         public virtual void AddByProcedure(M entity)
         {
             throw new NotImplementedException();
@@ -26,106 +29,137 @@ namespace MonitoringClient.Services.RepositoryServices
         {
             throw new NotImplementedException();
         }
-        public virtual List<M> GetDuplicateLogEntries()
+        public virtual IQueryable<M> GetDuplicateLogEntries()
         {
-            throw new NotImplementedException();
-        }
+            var allEntries = GetAll();
+            var duplicateLogEntries = Enumerable.Empty<M>().AsQueryable();
 
-        public virtual string TableName => "";
+            var dups = _duplicateChecker.FindDuplicates(allEntries).Where(x => x is M).Cast<M>();
+            duplicateLogEntries = dups.AsQueryable();
+            return duplicateLogEntries;
+        }
 
         public virtual void Add(M entity)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual long Count(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            var commandText = $"SELECT COUNT(*) FROM {TableName}" + CreateWhereCondition(whereCondition, parameterValues);
             try
             {
-                using (var conn = _databaseService.CreateDatabaseConnection())
+                if (entity != null)
                 {
-                    using (var cmd = _databaseService.CreateCommand(commandText, conn))
-                    {
-                        conn.Open();
-                        return (long)cmd.ExecuteScalar();
-                    }
+                    _databaseService.Insert(entity);
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 MessageBox.Show(e.Message);
-                throw e;
             }
+        }
+        public virtual void Delete(M entity)
+        {
+            try
+            {
+                if (entity != null)
+                {
+                    _databaseService.Delete(entity);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
+            }
+        }
+        public virtual void Update(M entity)
+        {
+            try
+            {
+                if (entity != null)
+                {
+                    _databaseService.Update(entity);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
+            }
+
+        }
+
+        public virtual long Count(Expression<Func<M, bool>> whereCondition)
+        {
+            return GetAll(whereCondition).Count();
         }
 
         public virtual long Count()
         {
-            var commandText = $"SELECT COUNT(*) FROM {TableName}";
+            return GetAll().Count();
+        }
+
+        public virtual IQueryable<M> GetAll(Expression<Func<M, bool>> whereCondition)
+        {
+            var entries = Enumerable.Empty<M>().AsQueryable();
             try
             {
-                using (var conn = _databaseService.CreateDatabaseConnection())
-                {
-                    using (var cmd = _databaseService.CreateCommand(commandText, conn))
-                    {
-                        conn.Open();
-                        return (long)cmd.ExecuteScalar();
-                    }
-                }
+                entries = _databaseService.GetTable<M>().Where(whereCondition);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 MessageBox.Show(e.Message);
-                throw e;
             }
+
+            return entries;
+
         }
 
-        public virtual void Delete(M entity)
+        public virtual IQueryable<M> GetAll()
         {
-            throw new System.NotImplementedException();
-        }
+            var entries = Enumerable.Empty<M>().AsQueryable();
+            try
+            {
+                entries = _databaseService.GetTable<M>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
+            }
 
-        public virtual List<M> GetAll(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            throw new System.NotImplementedException();
-        }
+            return entries;
 
-        public virtual List<M> GetAll()
-        {
-            throw new System.NotImplementedException();
         }
 
         public virtual M GetSingle<P>(P pkValue)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual System.Linq.IQueryable<M> Query(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual void Update(M entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected string CreateWhereCondition(string whereCondition, Dictionary<string, object> parameterValues)
-        {
-            var finalWhereCondition = whereCondition;
-            if (parameterValues != null && whereCondition != null)
+            var single = new M();
+            try
             {
-                foreach (var valuePair in parameterValues)
-                {
-                    finalWhereCondition.Replace("@" + valuePair.Key, valuePair.Value.ToString());
-                }
-
-                return " WHERE " + finalWhereCondition;
+                single = _databaseService.GetTable<M>().Single(s => s.Id.Equals(pkValue));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
             }
 
-            return "";
+            return single;
+
+        }
+
+        public virtual System.Linq.IQueryable<M> Query(Expression<Func<M, bool>> whereCondition)
+        {
+            var entries = Enumerable.Empty<M>().AsQueryable();
+            try
+            {
+                entries = _databaseService.GetTable<M>().Where(whereCondition);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
+            }
+            return entries;
         }
     }
 }

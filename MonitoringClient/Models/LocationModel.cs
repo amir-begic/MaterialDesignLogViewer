@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace MonitoringClient.Models
 {
+    [Table("location")]
     public class LocationModel :  BaseModel
     {
         private int _address_fk;
-
+        [Column("address_fk")]
         public int AddressForeignKey
         {
             get => _address_fk;
@@ -21,7 +23,7 @@ namespace MonitoringClient.Models
         }
 
         private string _designation;
-
+        [Column("designation")]
         public string Designation
         {
             get => _designation;
@@ -32,18 +34,8 @@ namespace MonitoringClient.Models
             }
         }
 
-        private string _hostname;
-        public string Hostname
-        {
-            get => _hostname;
-            set
-            {
-                _hostname = value;
-                OnPropertyChanged("Hostname");
-            }
-        }
-
         private int _building;
+        [Column("building")]
         public int Building
         {
             get => _building;
@@ -55,6 +47,7 @@ namespace MonitoringClient.Models
         }
 
         private int _room;
+        [Column("room")]
         public int Room
         {
             get => _room;

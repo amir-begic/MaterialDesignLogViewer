@@ -1,12 +1,11 @@
-﻿using MySql.Data.MySqlClient;
+﻿using LinqToDB;
+using LinqToDB.Data;
 
 namespace MonitoringClient.Services
 {
-    public interface IDatabaseService
+    public interface IDatabaseService<M>: IDataContext
     {
-        MySqlConnection CreateDatabaseConnection();
-        MySqlCommand CreateCommand(string commandText, MySqlConnection connection);
-        bool CloseDatabaseConnection();
+        void RunStoredProcedure<M>(string storedProcedureName, DataParameter[] parameters);
         void TestDatabaseConnection();
     }
 }

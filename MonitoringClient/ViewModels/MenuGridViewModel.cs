@@ -24,7 +24,8 @@ namespace MonitoringClient.ViewModels
         {
             //Initial Container and Service registration
             var services = new ServiceCollection();
-            services.AddSingleton<IDatabaseService, DatabaseService>();
+            services.AddTransient<IDatabaseService<LogEntry>, DatabaseService<LogEntry>>();
+            //services.AddSingleton<IDatabaseService<LocationModel>, DatabaseService<LocationModel>>();
             //services.AddSingleton<ILogEntriesService, LogEntriesService>();
             services.AddTransient<IRepositoryBase<LogEntry>, LoggingRepository>();
             //services.AddTransient<IRepositoryBase<LocationModel>, LocationRepository>();
