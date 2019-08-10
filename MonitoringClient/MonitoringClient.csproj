@@ -125,7 +125,11 @@
     <Compile Include="Services\RepositoryServices\LocationRepository.cs" />
     <Compile Include="Services\RepositoryServices\LoggingRepository.cs" />
     <Compile Include="Services\RepositoryServices\RepositoryBase.cs" />
-    <Compile Include="Validation\AddressValidation.cs" />
+    <Compile Include="Validation\CustomerNrValidation.cs" />
+    <Compile Include="Validation\EmailValidation.cs" />
+    <Compile Include="Validation\PasswordValidation.cs" />
+    <Compile Include="Validation\TelephoneNrValidation.cs" />
+    <Compile Include="Validation\UrlValidation.cs" />
     <Compile Include="ViewModels\AddCustomerDialogViewModel.cs" />
     <Compile Include="ViewModels\AddLogEntryDialogViewModel.cs" />
     <Compile Include="ViewModels\CustomerOverviewViewModel.cs" />
@@ -210,7 +214,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
