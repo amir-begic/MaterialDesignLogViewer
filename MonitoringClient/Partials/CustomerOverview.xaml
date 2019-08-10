@@ -36,12 +36,20 @@
             Grid.ColumnSpan="4"
             Grid.Row="0"
             Margin="0 8 0 0"
+            AutoGenerateColumns="False"
             ItemsSource="{Binding Customers, Mode=TwoWay}"
             SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
             CanUserSortColumns="True"
             CanUserAddRows="False"
             materialDesign:DataGridAssist.CellPadding="4 2 2 2"
-            materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" />
+            materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Customer Nr" Binding="{Binding CustomerNr}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"  />
+                <DataGridTextColumn Header="Website" Binding="{Binding Website}"  />
+                <DataGridTextColumn Header="Telephone" Binding="{Binding TelephoneNr}"  />
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="btnAddNewCustomer" Grid.Row="1" Grid.Column="0" Margin="30 0 30 0" Command="{Binding AddCustomerCommand}">New</Button>
         <Button x:Name="btnClearCustomer"  Grid.Row="1" Grid.Column="1" Margin="30 0 30 0" Command="{Binding DeleteCustomerCommand}">Delete</Button>
         <Button x:Name="btnEditCustomer"  Grid.Row="1" Grid.Column="2" Margin="30 0 30 0" Command="{Binding EditCustomerCommand}">Edit</Button>

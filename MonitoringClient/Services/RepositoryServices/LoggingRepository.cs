@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using DuplicateCheckerLib;
-using LinqToDB.Data;
+﻿using LinqToDB.Data;
 using MonitoringClient.Models;
 
 namespace MonitoringClient.Services.RepositoryServices
