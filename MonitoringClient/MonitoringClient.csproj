@@ -86,17 +86,27 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\UI\MenuItem.cs" />
+    <Compile Include="Partials\AddCustomerDialog.xaml.cs">
+      <DependentUpon>AddCustomerDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Partials\AddLogEntryDialog.xaml.cs">
       <DependentUpon>AddLogEntryDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Partials\CloseApplicationDialog.xaml.cs">
       <DependentUpon>CloseApplicationDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Partials\CustomerOverview.xaml.cs">
+      <DependentUpon>CustomerOverview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Partials\DisplayDuplicateLogEntriesDialog.xaml.cs">
       <DependentUpon>DisplayDuplicateLogEntriesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partials\EditCustomerDialog.xaml.cs">
+      <DependentUpon>EditCustomerDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Partials\LogOverview.xaml.cs">
       <DependentUpon>LogOverview.xaml</DependentUpon>
@@ -109,13 +119,18 @@
     </Compile>
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\IDatabaseService.cs" />
+    <Compile Include="Services\RepositoryServices\CustomerRepository.cs" />
     <Compile Include="Services\RepositoryServices\IRepositoryBase.cs" />
     <Compile Include="Exceptions\MissingSettingException.cs" />
     <Compile Include="Services\RepositoryServices\LocationRepository.cs" />
     <Compile Include="Services\RepositoryServices\LoggingRepository.cs" />
     <Compile Include="Services\RepositoryServices\RepositoryBase.cs" />
+    <Compile Include="Validation\AddressValidation.cs" />
+    <Compile Include="ViewModels\AddCustomerDialogViewModel.cs" />
     <Compile Include="ViewModels\AddLogEntryDialogViewModel.cs" />
+    <Compile Include="ViewModels\CustomerOverviewViewModel.cs" />
     <Compile Include="ViewModels\DisplayDuplicateLogEntriesDialogViewModel.cs" />
+    <Compile Include="ViewModels\EditCustomerDialogViewModel.cs" />
     <Compile Include="ViewModels\LogOverviewViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MenuGridViewModel.cs" />
@@ -132,6 +147,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Partials\AddCustomerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Partials\AddLogEntryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,7 +159,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Partials\CustomerOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Partials\DisplayDuplicateLogEntriesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Partials\EditCustomerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
