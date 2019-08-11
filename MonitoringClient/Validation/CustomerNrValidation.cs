@@ -12,7 +12,7 @@ namespace MonitoringClient.Validation
 
         public CustomerNrValidation()
         {
-            _pattern = "^CU.*";
+            _pattern = "^CU[0-9]{5}$";
             _regex = new Regex(_pattern);
         }
 

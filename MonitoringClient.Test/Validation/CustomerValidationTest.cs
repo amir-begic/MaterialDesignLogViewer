@@ -22,7 +22,29 @@ namespace MonitoringClient.Test.Validation
         [TestMethod]
         public void CustomerNr_Does_NOT_Start_With_CU_Prefix()
         {
-            var newCustomerNr = "3232847";
+            var newCustomerNr = "3232832";
+            var validator = new CustomerNrValidation();
+
+            var result = validator.Validate(newCustomerNr, CultureInfo.CurrentCulture);
+
+            Assert.IsFalse(result.IsValid);
+        }
+
+        [TestMethod]
+        public void CustomerNr_Too_Short()
+        {
+            var newCustomerNr = "CU344";
+            var validator = new CustomerNrValidation();
+
+            var result = validator.Validate(newCustomerNr, CultureInfo.CurrentCulture);
+
+            Assert.IsFalse(result.IsValid);
+        }
+
+        [TestMethod]
+        public void CustomerNr_Too_Long()
+        {
+            var newCustomerNr = "CU34433333";
             var validator = new CustomerNrValidation();
 
             var result = validator.Validate(newCustomerNr, CultureInfo.CurrentCulture);
