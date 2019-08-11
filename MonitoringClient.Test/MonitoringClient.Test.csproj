@@ -54,7 +54,7 @@
     <Compile Include="Validation\EmailValidationTest.cs" />
     <Compile Include="Validation\CustomerValidationTest.cs" />
     <Compile Include="Validation\PasswordValidationTest.cs" />
-    <Compile Include="Validation\PhoneNrValidationTest.cs" />
+    <Compile Include="Validation\TelephoneNrValidationTest.cs" />
     <Compile Include="Validation\UrlValidationTest.cs" />
   </ItemGroup>
   <ItemGroup>
