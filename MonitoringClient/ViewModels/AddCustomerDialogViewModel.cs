@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using MonitoringClient.Models;
+using MonitoringClient.Services.EncryptionService;
 using MonitoringClient.Services.RepositoryServices;
 
 namespace MonitoringClient.ViewModels
@@ -11,10 +12,13 @@ namespace MonitoringClient.ViewModels
     {
         private ICommand _addCustomerCommand;
         private readonly IRepositoryBase<CustomerModel> _customerRepository;
+        private readonly IEncryptionService _encryptionService;
 
-        public AddCustomerDialogViewModel(IRepositoryBase<CustomerModel> customerRepository)
+        public AddCustomerDialogViewModel(IRepositoryBase<CustomerModel> customerRepository,
+            IEncryptionService encryptionService)
         {
             _customerRepository = customerRepository;
+            _encryptionService = encryptionService;
             NewCustomerModel = new CustomerModel
             {
                 Address = 1,
@@ -25,6 +29,7 @@ namespace MonitoringClient.ViewModels
 
         private void AddCustomer()
         {
+            NewCustomerModel.Password = _encryptionService.GenerateSaltedHash(NewCustomerModel.Password);
             _customerRepository.Add(NewCustomerModel);
             DialogHost.CloseDialogCommand.Execute(null, null);
         }

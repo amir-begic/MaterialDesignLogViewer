@@ -118,6 +118,8 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\DatabaseService.cs" />
+    <Compile Include="Services\EncryptionService\EncryptionService.cs" />
+    <Compile Include="Services\EncryptionService\IEncryptionService.cs" />
     <Compile Include="Services\IDatabaseService.cs" />
     <Compile Include="Services\RepositoryServices\CustomerRepository.cs" />
     <Compile Include="Services\RepositoryServices\IRepositoryBase.cs" />

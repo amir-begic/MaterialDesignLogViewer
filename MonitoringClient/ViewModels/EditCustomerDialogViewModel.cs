@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using MonitoringClient.Models;
+using MonitoringClient.Services.EncryptionService;
 using MonitoringClient.Services.RepositoryServices;
 
 namespace MonitoringClient.ViewModels
@@ -17,10 +18,13 @@ namespace MonitoringClient.ViewModels
         private ICommand _updateCustomerCommand; 
 
         private readonly IRepositoryBase<CustomerModel> _customerRepository;
+        private readonly IEncryptionService _encryptionService;
 
-        public EditCustomerDialogViewModel(IRepositoryBase<CustomerModel> customerRepository, CustomerModel selectedCustomerModel)
+        public EditCustomerDialogViewModel(IRepositoryBase<CustomerModel> customerRepository, CustomerModel selectedCustomerModel,
+            IEncryptionService encryptionService)
         {
             _customerRepository = customerRepository;
+            _encryptionService = encryptionService;
             SelectedCustomer = selectedCustomerModel;
         }
 
@@ -28,6 +32,7 @@ namespace MonitoringClient.ViewModels
 
         private void UpdateCustomer()
         {
+            SelectedCustomer.Password = _encryptionService.GenerateSaltedHash(SelectedCustomer.Password);
             _customerRepository.Update(SelectedCustomer);
             DialogHost.CloseDialogCommand.Execute(null, null);
         }

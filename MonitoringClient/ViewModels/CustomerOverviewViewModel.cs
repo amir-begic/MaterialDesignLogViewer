@@ -11,6 +11,7 @@ using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using MonitoringClient.Models;
 using MonitoringClient.Partials;
+using MonitoringClient.Services.EncryptionService;
 using MonitoringClient.Services.RepositoryServices;
 using MySql.Data.MySqlClient.Authentication;
 
@@ -27,15 +28,18 @@ namespace MonitoringClient.ViewModels
     {
         private readonly IRepositoryBase<CustomerModel> _customerRepository;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IEncryptionService _encryptionService;
+
         private ICommand _refreshCustomersCommand;
         private ICommand _addCustomerCommand;
         private ICommand _editCustomerCommand;
         private ICommand _deleteCustomersCommand;
 
-        public CustomerOverviewViewModel(IServiceProvider serviceProvider, IRepositoryBase<CustomerModel> customerRepository)
+        public CustomerOverviewViewModel(IServiceProvider serviceProvider, IRepositoryBase<CustomerModel> customerRepository,
+            IEncryptionService encryptionService)
         {
             _serviceProvider = serviceProvider;
-
+            _encryptionService = encryptionService;
             Customers = new ObservableCollection<CustomerModel>{
                 new CustomerModel
                 {
@@ -74,7 +78,7 @@ namespace MonitoringClient.ViewModels
 
             var dialog = new EditCustomerDialog()
             {
-                DataContext = new EditCustomerDialogViewModel(_customerRepository, SelectedCustomer)
+                DataContext = new EditCustomerDialogViewModel(_customerRepository, SelectedCustomer, _encryptionService)
             };
 
             var result = await DialogHost.Show(dialog);

@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MonitoringClient.Models;
 using MonitoringClient.Models.UI;
 using MonitoringClient.Partials;
 using MonitoringClient.Services;
+using MonitoringClient.Services.EncryptionService;
 using MonitoringClient.Services.RepositoryServices;
 
 namespace MonitoringClient.ViewModels
@@ -26,6 +28,7 @@ namespace MonitoringClient.ViewModels
             services.AddTransient<IRepositoryBase<LogEntry>, LoggingRepository>();
             services.AddTransient<IRepositoryBase<CustomerModel>, CustomerRepository>();
             //services.AddTransient<IRepositoryBase<LocationModel>, LocationRepository>();
+            services.AddTransient<IEncryptionService, EncryptionService>();
 
             services.AddTransient<IMainWindowViewModel, MainWindowViewModel>();
             services.AddTransient<ISettingsViewModel, SettingsViewModel>();
