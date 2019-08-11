@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Xsl;
 using MaterialDesignThemes.Wpf;
@@ -13,6 +15,7 @@ using MonitoringClient.Models;
 using MonitoringClient.Partials;
 using MonitoringClient.Services.EncryptionService;
 using MonitoringClient.Services.RepositoryServices;
+using MonitoringClient.Validation;
 using MySql.Data.MySqlClient.Authentication;
 
 namespace MonitoringClient.ViewModels
@@ -34,6 +37,7 @@ namespace MonitoringClient.ViewModels
         private ICommand _addCustomerCommand;
         private ICommand _editCustomerCommand;
         private ICommand _deleteCustomersCommand;
+        private ICommand _telDetailsCommand;
 
         public CustomerOverviewViewModel(IServiceProvider serviceProvider, IRepositoryBase<CustomerModel> customerRepository,
             IEncryptionService encryptionService)
@@ -102,6 +106,44 @@ namespace MonitoringClient.ViewModels
             }
         }
 
+        private void ShowTelDetails()
+        {
+            var internationalvorwahl = "";
+            var vorwahl = "";
+            var nummer = "";
+            var durchwahl = "";
+
+            if (SelectedCustomer == null)
+                return;
+            var validatePhone = new TelephoneNrValidation();
+
+            if (validatePhone.Validate(SelectedCustomer.TelephoneNr, CultureInfo.CurrentCulture).IsValid == false)
+                return;
+
+            var match = validatePhone.GetPhoneNrMatchingGroups(SelectedCustomer.TelephoneNr);
+            if (match.Groups.Count == 5)
+            {
+                internationalvorwahl = match.Groups[1].Value;
+                vorwahl = match.Groups[2].Value;
+                nummer = match.Groups[3].Value;
+                durchwahl = match.Groups[4].Value;
+            }
+            else
+            {
+                vorwahl = match.Groups[1].Value;
+                nummer = match.Groups[2].Value;
+                durchwahl = match.Groups[3].Value;
+            }
+
+            MessageBox.Show(
+                    string.Format("Internationale Vorwahl={0}\n Nationale Vorwahl={1}\n Nummer={2} \nDurchwahl={3};",
+                        internationalvorwahl,
+                        vorwahl,
+                        nummer,
+                        durchwahl)
+            );
+        }
+
         public ICommand AddCustomerCommand
         {
             get
@@ -144,6 +186,21 @@ namespace MonitoringClient.ViewModels
                 }
 
                 return _deleteCustomersCommand;
+            }
+        }
+
+        public ICommand TelDetailsCommand
+        {
+            get
+            {
+                if (_telDetailsCommand == null)
+                {
+                    _telDetailsCommand = new RelayCommand(
+                        p => true,
+                        p => ShowTelDetails());
+                }
+
+                return _telDetailsCommand;
             }
         }
 

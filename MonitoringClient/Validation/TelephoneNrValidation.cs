@@ -32,6 +32,27 @@ namespace MonitoringClient.Validation
 
         }
 
+        public Match GetPhoneNrMatchingGroups(string telephoneNubmer)
+        {
+            telephoneNubmer = telephoneNubmer.Replace(" ", string.Empty);
+            if (_regexAreaCodeCHInternational.Match(telephoneNubmer).Success)
+            {
+                return _regexAreaCodeCHInternational.Match(telephoneNubmer);
+            }
+            else if (_regexAreaCodeDEInternational.Match(telephoneNubmer).Success)
+            {
+                return _regexAreaCodeDEInternational.Match(telephoneNubmer);
+            }
+            else if (_regexAreaCodeLInternationalI.Match(telephoneNubmer).Success)
+            {
+                return _regexAreaCodeLInternationalI.Match(telephoneNubmer);
+            }
+            else
+            {
+                return _regexLocal.Match(telephoneNubmer);
+            }
+        }
+
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             var tel = value as string;

@@ -31,9 +31,10 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <DataGrid
-            Grid.ColumnSpan="4"
+            Grid.ColumnSpan="5"
             Grid.Row="0"
             Margin="0 8 0 0"
             AutoGenerateColumns="False"
@@ -48,11 +49,13 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"  />
                 <DataGridTextColumn Header="Website" Binding="{Binding Website}"  />
                 <DataGridTextColumn Header="Telephone" Binding="{Binding TelephoneNr}"  />
+                <DataGridTextColumn Header="Password" Binding="{Binding Password}"  />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnAddNewCustomer" Grid.Row="1" Grid.Column="0" Margin="30 0 30 0" Command="{Binding AddCustomerCommand}">New</Button>
         <Button x:Name="btnClearCustomer"  Grid.Row="1" Grid.Column="1" Margin="30 0 30 0" Command="{Binding DeleteCustomerCommand}">Delete</Button>
         <Button x:Name="btnEditCustomer"  Grid.Row="1" Grid.Column="2" Margin="30 0 30 0" Command="{Binding EditCustomerCommand}">Edit</Button>
-        <Button x:Name="btnRefreshGrid"  Grid.Row="1" Grid.Column="3" Margin="30 0 30 0" Command="{Binding RefreshCustomersCommand}">Refresh</Button>
+        <Button x:Name="btnDisplayPhone"  Grid.Row="1" Grid.Column="3" Margin="30 0 30 0" Command="{Binding TelDetailsCommand}">Tel Details</Button>
+        <Button x:Name="btnRefreshGrid"  Grid.Row="1" Grid.Column="4" Margin="30 0 30 0" Command="{Binding RefreshCustomersCommand}">Refresh</Button>
     </Grid>
 </UserControl>
