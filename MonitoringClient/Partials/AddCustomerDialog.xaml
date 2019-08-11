@@ -87,7 +87,7 @@
                  FontSize="16" Grid.Row="6"
                  Name ="txtPwd">
             <TextBox.Text>
-                <Binding Path="NewCustomerModel.Password" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                <Binding Path="NewCustomerModel.Password" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource">
                     <Binding.ValidationRules>
                         <validation:PasswordValidation />
                     </Binding.ValidationRules>
