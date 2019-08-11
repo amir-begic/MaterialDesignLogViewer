@@ -11,7 +11,9 @@ namespace MonitoringClient.Validation
 {
     public class TelephoneNrValidation : ValidationRule
     {
-        private string _pattern;
+        private string _patternAreaCodeCH;
+        private string _patternAreaCodeDE;
+        private string _patternAreaCodeLI;
         private Regex _regex;
 
         public TelephoneNrValidation()

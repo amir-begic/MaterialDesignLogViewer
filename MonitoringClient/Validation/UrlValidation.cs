@@ -16,7 +16,7 @@ namespace MonitoringClient.Validation
 
         public UrlValidation()
         {
-            _pattern = "^.*";
+            _pattern = @"^((https?):\/\/{1})?([a-z0-9]\.)?[a-z0-9]+\.{1}([a-z]+\.{1})?[a-z0-9\/\?\=\&]+";
             _regex = new Regex(_pattern);
         }
 

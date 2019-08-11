@@ -16,7 +16,7 @@ namespace MonitoringClient.Validation
 
         public PasswordValidation()
         {
-            _pattern = "^.*";
+            _pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
             _regex = new Regex(_pattern);
         }
 
