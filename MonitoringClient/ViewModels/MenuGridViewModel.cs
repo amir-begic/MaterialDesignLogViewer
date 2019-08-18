@@ -2,11 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MonitoringClient.Models;
+using MonitoringClient.Models.EntityFramework;
 using MonitoringClient.Models.UI;
 using MonitoringClient.Partials;
 using MonitoringClient.Services;
 using MonitoringClient.Services.EncryptionService;
 using MonitoringClient.Services.RepositoryServices;
+using MonitoringClient.Services.RepositoryServices.MsSqlRepository;
+using MonitoringClient.Services.RepositoryServices.MSSQLRepository;
 
 namespace MonitoringClient.ViewModels
 {
@@ -21,12 +24,13 @@ namespace MonitoringClient.ViewModels
         {
             //Initial Container and Service registration
             var services = new ServiceCollection();
-            services.AddScoped<IDatabaseService<LogEntry>, DatabaseService<LogEntry>>();
+            services.AddScoped<IDatabaseService<LogEntryModel>, DatabaseService<LogEntryModel>>();
             services.AddScoped<IDatabaseService<CustomerModel>, DatabaseService<CustomerModel>>();
+            services.AddScoped<IEntityFirstDatabaseService<Customer>, EntityFirstDatabaseService<Customer>>();
             //services.AddSingleton<IDatabaseService<LocationModel>, DatabaseService<LocationModel>>();
-            //services.AddSingleton<ILogEntriesService, LogEntriesService>();
-            services.AddTransient<IRepositoryBase<LogEntry>, LoggingRepository>();
+            services.AddTransient<IRepositoryBase<LogEntryModel>, LoggingRepository>();
             services.AddTransient<IRepositoryBase<CustomerModel>, CustomerRepository>();
+            services.AddTransient<IRepositoryBaseMsSql<Customer>, CustomerRepositoryMsSql>();
             //services.AddTransient<IRepositoryBase<LocationModel>, LocationRepository>();
             services.AddTransient<IEncryptionService, EncryptionService>();
 

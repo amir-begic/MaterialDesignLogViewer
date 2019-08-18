@@ -31,15 +31,44 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <TextBlock>New Customer Entry:</TextBlock>
-        <TextBox materialDesign:HintAssist.Hint="Customer Nr." Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+        <TextBox materialDesign:HintAssist.Hint="First Name" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="0 6 0 0"
                  FontSize="16" Grid.Row="1"
+                 Name ="txtFirstName"
+        >
+            <TextBox.Text>
+                <Binding Path="NewCustomerModel.Firstname" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" />
+            </TextBox.Text>
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Last Name" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="0 6 0 0"
+                 FontSize="16" Grid.Row="2"
+                 Name ="txtLastName"
+        >
+            <TextBox.Text>
+                <Binding Path="NewCustomerModel.Lastname" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" />
+            </TextBox.Text>
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Address" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="0 6 0 0"
+                 FontSize="16" Grid.Row="3"
+                 Name ="txtAddress"
+        >
+            <TextBox.Text>
+                <Binding Path="NewCustomerModel.Addressnumber" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" />
+            </TextBox.Text>
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Customer Nr." Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="0 6 0 0"
+                 FontSize="16" Grid.Row="4"
                  Name ="txtCustomer_Nr"
                  >
             <TextBox.Text>
-                <Binding Path="NewCustomerModel.CustomerNr" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                <Binding Path="NewCustomerModel.CustomerAccountNumber" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                     <Binding.ValidationRules>
                         <validation:CustomerNrValidation />
                     </Binding.ValidationRules>
@@ -48,10 +77,10 @@
         </TextBox>
         <TextBox materialDesign:HintAssist.Hint="Telephone" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                  Margin="0 6 0 0"
-                 FontSize="16" Grid.Row="2"
+                 FontSize="16" Grid.Row="5"
                  Name ="txtTelephone_Nr">
             <TextBox.Text>
-                <Binding Path="NewCustomerModel.TelephoneNr" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                <Binding Path="NewCustomerModel.Phonenumber" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                     <Binding.ValidationRules>
                         <validation:TelephoneNrValidation />
                     </Binding.ValidationRules>
@@ -60,7 +89,7 @@
         </TextBox>
         <TextBox materialDesign:HintAssist.Hint="Email" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                  Margin="0 6 0 0"
-                 FontSize="16" Grid.Row="3"
+                 FontSize="16" Grid.Row="6"
                  Name ="txtEmail">
             <TextBox.Text>
                 <Binding Path="NewCustomerModel.Email" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -72,7 +101,7 @@
         </TextBox>
         <TextBox materialDesign:HintAssist.Hint="Website" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                  Margin="0 6 0 0"
-                 FontSize="16" Grid.Row="4"
+                 FontSize="16" Grid.Row="7"
                  Name ="txtWebsite">
             <TextBox.Text>
                 <Binding Path="NewCustomerModel.Website" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -84,7 +113,7 @@
         </TextBox>
         <TextBox materialDesign:HintAssist.Hint="Password" Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}"
                  Margin="0 6 0 0"
-                 FontSize="16" Grid.Row="6"
+                 FontSize="16" Grid.Row="8"
                  Name ="txtPwd">
             <TextBox.Text>
                 <Binding Path="NewCustomerModel.Password" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource">
@@ -94,7 +123,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <StackPanel Orientation="Horizontal" Grid.Row="7"
+        <StackPanel Orientation="Horizontal" Grid.Row="9"
                     Margin="0 16 0 0">
             <Button IsDefault="True"
                     Command="{Binding AddCustomerCommand}"

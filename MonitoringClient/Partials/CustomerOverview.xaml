@@ -45,10 +45,10 @@
             materialDesign:DataGridAssist.CellPadding="4 2 2 2"
             materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Customer Nr" Binding="{Binding CustomerNr}" />
+                <DataGridTextColumn Header="Customer Nr" Binding="{Binding CustomerAccountNumber}" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"  />
                 <DataGridTextColumn Header="Website" Binding="{Binding Website}"  />
-                <DataGridTextColumn Header="Telephone" Binding="{Binding TelephoneNr}"  />
+                <DataGridTextColumn Header="Telephone" Binding="{Binding Phonenumber}"  />
                 <DataGridTextColumn Header="Password" Binding="{Binding Password}"  />
             </DataGrid.Columns>
         </DataGrid>

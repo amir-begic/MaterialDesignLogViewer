@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d3e26e4d21624f3c872301b0139fe4aa" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Accounting" Width="1.5" PointX="13.5" PointY="10.5" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Address" Width="1.5" PointX="1.5" PointY="6.75" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Contact" Width="1.5" PointX="13.5" PointY="2.875" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Credential" Width="1.5" PointX="8.25" PointY="25.25" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.CustomerAccount" Width="1.5" PointX="11.25" PointY="7.875" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Device" Width="1.5" PointX="6" PointY="10.125" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Deviceport" Width="1.5" PointX="8.25" PointY="11" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Devicetype" Width="1.5" PointX="0.75" PointY="11" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.DevicetypeHasOperatingsystem" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Interface" Width="1.5" PointX="11.25" PointY="10.375" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Location" Width="1.5" PointX="3.75" PointY="6.625" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Log" Width="1.5" PointX="8.25" PointY="22.25" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.LogEntry" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Network" Width="1.5" PointX="9" PointY="8" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Operatingsystem" Width="1.5" PointX="0.75" PointY="14.125" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Person" Width="1.5" PointX="11.25" PointY="2.875" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Pointofdelivery" Width="1.5" PointX="15.75" PointY="5.25" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Product" Width="1.5" PointX="18" PointY="9.875" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Productgroup" Width="1.5" PointX="15.75" PointY="9.625" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.SoftwareService" Width="1.5" PointX="15.75" PointY="12.75" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Town" Width="1.5" PointX="1.5" PointY="3.25" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Transportmedium" Width="1.5" PointX="6" PointY="7.25" />
+        <AssociationConnector Association="InventarisierungsloesungModel.abrechnung_abrechnung_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.abrechnung_abrechnung_ibfk_2" />
+        <AssociationConnector Association="InventarisierungsloesungModel.abrechnung_abrechnung_ibfk_3" />
+        <AssociationConnector Association="InventarisierungsloesungModel.abrechnung_abrechnung_ibfk_4" />
+        <AssociationConnector Association="InventarisierungsloesungModel.produktegruppe_produktegruppe_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.softwaredienstleistung_softwaredienstleistung_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.address_address_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.location_location_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.contact_contact_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.pointofdelivery_pointofdelivery_ibfk_2" />
+        <AssociationConnector Association="InventarisierungsloesungModel.device_device_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.deviceport_deviceport_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.FK__Device__DeviceTy__6166761E" />
+        <AssociationConnector Association="InventarisierungsloesungModel.interface_interface_ibfk_2" />
+        <AssociationConnector Association="InventarisierungsloesungModel.log_log_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.deviceport_deviceport_ibfk_2" />
+        <AssociationConnector Association="InventarisierungsloesungModel.FK__Devicetyp__Devic__0880433F" />
+        <AssociationConnector Association="InventarisierungsloesungModel.FK__Devicetyp__Opera__09746778" />
+        <AssociationConnector Association="InventarisierungsloesungModel.interface_interface_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.pointofdelivery_pointofdelivery_ibfk_3" />
+        <AssociationConnector Association="InventarisierungsloesungModel.produkte_produkte_ibfk_1" />
+        <AssociationConnector Association="InventarisierungsloesungModel.DevicesHasCredentials" />
+        <EntityTypeShape EntityType="InventarisierungsloesungModel.Customer" Width="1.5" PointX="8.375" PointY="15" />
+        <AssociationConnector Association="InventarisierungsloesungModel.pointofdelivery_pointofdelivery_ibfk_1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

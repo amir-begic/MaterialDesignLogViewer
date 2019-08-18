@@ -15,12 +15,12 @@ namespace MonitoringClient.ViewModels
     {
 
         private ICommand _addLogEntryCommand;
-        private readonly IRepositoryBase<LogEntry> _loggingRepository;
+        private readonly IRepositoryBase<LogEntryModel> _loggingRepository;
 
-        public AddLogEntryDialogViewModel(IRepositoryBase<LogEntry> loggingRepository)
+        public AddLogEntryDialogViewModel(IRepositoryBase<LogEntryModel> loggingRepository)
         {
             _loggingRepository = loggingRepository;
-            NewLogEntry = new LogEntry
+            NewLogEntryModel = new LogEntryModel
             {
                 Timestamp = DateTime.Now
             };
@@ -28,11 +28,11 @@ namespace MonitoringClient.ViewModels
 
         private void AddLogEntry()
         {
-            _loggingRepository.AddByProcedure(NewLogEntry);
+            _loggingRepository.AddByProcedure(NewLogEntryModel);
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
-        public LogEntry NewLogEntry { get; set; }
+        public LogEntryModel NewLogEntryModel { get; set; }
 
         public ICommand AddLogEntryCommand
         {

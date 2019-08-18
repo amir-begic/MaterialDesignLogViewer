@@ -2,8 +2,10 @@
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using MonitoringClient.Models;
+using MonitoringClient.Models.EntityFramework;
 using MonitoringClient.Services.EncryptionService;
 using MonitoringClient.Services.RepositoryServices;
+using MonitoringClient.Services.RepositoryServices.MsSqlRepository;
 
 namespace MonitoringClient.ViewModels
 {
@@ -11,20 +13,15 @@ namespace MonitoringClient.ViewModels
     public class AddCustomerDialogViewModel : IAddCustomerDialogViewModel
     {
         private ICommand _addCustomerCommand;
-        private readonly IRepositoryBase<CustomerModel> _customerRepository;
+        private readonly IRepositoryBaseMsSql<Customer> _customerRepository;
         private readonly IEncryptionService _encryptionService;
 
-        public AddCustomerDialogViewModel(IRepositoryBase<CustomerModel> customerRepository,
+        public AddCustomerDialogViewModel(IRepositoryBaseMsSql<Customer> customerRepository,
             IEncryptionService encryptionService)
         {
             _customerRepository = customerRepository;
             _encryptionService = encryptionService;
-            NewCustomerModel = new CustomerModel
-            {
-                Address = 1,
-                Person = 1
-                
-            };
+            NewCustomerModel = new Customer();
         }
 
         private void AddCustomer()
@@ -34,7 +31,7 @@ namespace MonitoringClient.ViewModels
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
-        public CustomerModel NewCustomerModel { get; set; }
+        public Customer NewCustomerModel { get; set; }
 
         public ICommand AddCustomerCommand
         {

@@ -3,11 +3,11 @@ using MonitoringClient.Models;
 
 namespace MonitoringClient.Services.RepositoryServices
 {
-    public class LoggingRepository : RepositoryBase<LogEntry>
+    public class LoggingRepository : RepositoryBase<LogEntryModel>
     {
         public override string TableName => "v_logentries";
 
-        public LoggingRepository(IDatabaseService<LogEntry> databaseService) : base(databaseService)
+        public LoggingRepository(IDatabaseService<LogEntryModel> databaseService) : base(databaseService)
         {
         }
 
@@ -19,20 +19,20 @@ namespace MonitoringClient.Services.RepositoryServices
                 new DataParameter("id", kValue),
             };
 
-            _databaseService.RunStoredProcedure<LogEntry>("LogClear", dParams);
+            _databaseService.RunStoredProcedure<LogEntryModel>("LogClear", dParams);
         }
 
-        public override void AddByProcedure(LogEntry logEntry)
+        public override void AddByProcedure(LogEntryModel logEntryModel)
         {
             var dParams = new DataParameter[]
             {
-                new DataParameter("pod", logEntry.Pod ?? ""),
-                new DataParameter("hostname", logEntry.Hostname ?? ""),
-                new DataParameter("severity", logEntry.Severity),
-                new DataParameter("message", logEntry.Message ?? ""),
-                new DataParameter("location", logEntry.Location ?? "")
+                new DataParameter("pod", logEntryModel.Pod ?? ""),
+                new DataParameter("hostname", logEntryModel.Hostname ?? ""),
+                new DataParameter("severity", logEntryModel.Severity),
+                new DataParameter("message", logEntryModel.Message ?? ""),
+                new DataParameter("location", logEntryModel.Location ?? "")
             };
-            _databaseService.RunStoredProcedure<LogEntry>("LogMessageAdd", dParams);
+            _databaseService.RunStoredProcedure<LogEntryModel>("LogMessageAdd", dParams);
         }
     }
 }

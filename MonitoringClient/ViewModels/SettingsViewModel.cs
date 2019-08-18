@@ -11,10 +11,10 @@ namespace MonitoringClient.ViewModels
 
     public class SettingsViewModel : ISettingsViewModel
     {
-        private readonly IDatabaseService<LogEntry> _databaseService;
+        private readonly IDatabaseService<LogEntryModel> _databaseService;
         private ICommand _testDatabaseConnectionCommand;
 
-        public SettingsViewModel(IDatabaseService<LogEntry> databaseService)
+        public SettingsViewModel(IDatabaseService<LogEntryModel> databaseService)
         {
             _databaseService = databaseService;
             Database = Database;

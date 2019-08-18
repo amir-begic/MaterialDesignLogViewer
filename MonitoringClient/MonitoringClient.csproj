@@ -47,6 +47,12 @@
     <Reference Include="DuplicateCheckerLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DuplicateCheckerLib.1.0.0\lib\netstandard2.0\DuplicateCheckerLib.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -69,8 +75,11 @@
       <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -87,6 +96,96 @@
     </ApplicationDefinition>
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\EntityFramework\Accounting.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Address.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Contact.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Credential.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Customer.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\CustomerAccount.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Device.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Deviceport.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Devicetype.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\DevicetypeHasOperatingsystem.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\GetLocationsHirarchicalRecursive_Result.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Interface.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\InvetarisierungsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvetarisierungsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\InvetarisierungsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\InvetarisierungsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvetarisierungsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Location.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Log.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\LogEntry.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Network.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Operatingsystem.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Person.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Pointofdelivery.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Product.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Productgroup.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\SoftwareService.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\sysdiagram.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Town.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\Transportmedium.cs">
+      <DependentUpon>InvetarisierungsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\UI\MenuItem.cs" />
@@ -120,12 +219,17 @@
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\EncryptionService\EncryptionService.cs" />
     <Compile Include="Services\EncryptionService\IEncryptionService.cs" />
+    <Compile Include="Services\EntityFirstDatabaseService.cs" />
     <Compile Include="Services\IDatabaseService.cs" />
+    <Compile Include="Services\IEntityFirstDatabaseService.cs" />
     <Compile Include="Services\RepositoryServices\CustomerRepository.cs" />
     <Compile Include="Services\RepositoryServices\IRepositoryBase.cs" />
     <Compile Include="Exceptions\MissingSettingException.cs" />
     <Compile Include="Services\RepositoryServices\LocationRepository.cs" />
     <Compile Include="Services\RepositoryServices\LoggingRepository.cs" />
+    <Compile Include="Services\RepositoryServices\MsSqlRepository\BaseRepositoryMsSql.cs" />
+    <Compile Include="Services\RepositoryServices\MsSqlRepository\CustomerRepositoryMsSql.cs" />
+    <Compile Include="Services\RepositoryServices\MsSqlRepository\IRepositoryBaseMsSql.cs" />
     <Compile Include="Services\RepositoryServices\RepositoryBase.cs" />
     <Compile Include="Validation\CustomerNrValidation.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
@@ -191,7 +295,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\LogEntry.cs" />
+    <Compile Include="Models\LogEntryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -209,6 +313,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\EntityFramework\InvetarisierungsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>InvetarisierungsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\EntityFramework\InvetarisierungsModel.edmx.diagram">
+      <DependentUpon>InvetarisierungsModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -218,7 +329,24 @@
   <ItemGroup>
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Models\EntityFramework\InvetarisierungsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InvetarisierungsModel.edmx</DependentUpon>
+      <LastGenOutput>InvetarisierungsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EntityFramework\InvetarisierungsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InvetarisierungsModel.edmx</DependentUpon>
+      <LastGenOutput>InvetarisierungsModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -12,9 +12,11 @@ using System.Xml.Xsl;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using MonitoringClient.Models;
+using MonitoringClient.Models.EntityFramework;
 using MonitoringClient.Partials;
 using MonitoringClient.Services.EncryptionService;
 using MonitoringClient.Services.RepositoryServices;
+using MonitoringClient.Services.RepositoryServices.MsSqlRepository;
 using MonitoringClient.Validation;
 using MySql.Data.MySqlClient.Authentication;
 
@@ -29,7 +31,7 @@ namespace MonitoringClient.ViewModels
 
     public class CustomerOverviewViewModel : ICustomerOverviewViewModel
     {
-        private readonly IRepositoryBase<CustomerModel> _customerRepository;
+        private readonly IRepositoryBaseMsSql<Customer> _customerRepository;
         private readonly IServiceProvider _serviceProvider;
         private readonly IEncryptionService _encryptionService;
 
@@ -39,18 +41,23 @@ namespace MonitoringClient.ViewModels
         private ICommand _deleteCustomersCommand;
         private ICommand _telDetailsCommand;
 
-        public CustomerOverviewViewModel(IServiceProvider serviceProvider, IRepositoryBase<CustomerModel> customerRepository,
+        public CustomerOverviewViewModel(IServiceProvider serviceProvider, IRepositoryBaseMsSql<Customer> customerRepository,
             IEncryptionService encryptionService)
         {
             _serviceProvider = serviceProvider;
             _encryptionService = encryptionService;
-            Customers = new ObservableCollection<CustomerModel>{
-                new CustomerModel
+            Customers = new ObservableCollection<Customer>{
+                new Customer
                 {
-                    CustomerNr = "CU00001",
-                    Password = "",
-                    TelephoneNr = "+41 2202 3003 20",
-                    Website = "lo"
+                    Addressnumber = "444",
+                    CustomerAccountNumber = "44254",
+                    Email = "dsaff@ddd.de",
+                    Firstname = "dasfsf",
+                    Id = 22,
+                    Lastname = "asfdafda",
+                    Password = "dsafsf",
+                    Phonenumber = "fgfdsgfg",
+                    Website = "dafaf.de"
                 }
             };
 
@@ -70,7 +77,6 @@ namespace MonitoringClient.ViewModels
         {
             if (SelectedCustomer==null)
                 return;
-
             _customerRepository.Delete(SelectedCustomer);
             RefreshCustomers();
         }
@@ -117,10 +123,10 @@ namespace MonitoringClient.ViewModels
                 return;
             var validatePhone = new TelephoneNrValidation();
 
-            if (validatePhone.Validate(SelectedCustomer.TelephoneNr, CultureInfo.CurrentCulture).IsValid == false)
+            if (validatePhone.Validate(SelectedCustomer.Phonenumber, CultureInfo.CurrentCulture).IsValid == false)
                 return;
 
-            var match = validatePhone.GetPhoneNrMatchingGroups(SelectedCustomer.TelephoneNr);
+            var match = validatePhone.GetPhoneNrMatchingGroups(SelectedCustomer.Phonenumber);
             if (match.Groups.Count == 5)
             {
                 internationalvorwahl = match.Groups[1].Value;
@@ -219,7 +225,7 @@ namespace MonitoringClient.ViewModels
             }
         }
 
-        public ObservableCollection<CustomerModel> Customers { get; set; }
-        public CustomerModel SelectedCustomer { get; set; }
+        public ObservableCollection<Customer> Customers { get; set; }
+        public Customer SelectedCustomer { get; set; }
     }
 }

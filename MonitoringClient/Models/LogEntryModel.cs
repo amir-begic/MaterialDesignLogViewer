@@ -6,7 +6,7 @@ using LinqToDB.Mapping;
 namespace MonitoringClient.Models
 {
     [Table("v_logentries")]
-    public class LogEntry : BaseModel
+    public class LogEntryModel : BaseModel
     {
             
         private string _pod;
@@ -81,7 +81,7 @@ namespace MonitoringClient.Models
             }
         }
 
-        private bool Equals(LogEntry le)
+        private bool Equals(LogEntryModel le)
         {
             if (le == null) return false;
 
@@ -94,22 +94,22 @@ namespace MonitoringClient.Models
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((LogEntry)obj);
+            return Equals((LogEntryModel)obj);
         }
 
-        public static bool operator ==(LogEntry logEntryA, LogEntry logEntryB)
+        public static bool operator ==(LogEntryModel logEntryModelA, LogEntryModel logEntryModelB)
         {
-            if (ReferenceEquals(logEntryB, null)) return false;
-            if (ReferenceEquals(logEntryA, null)) return false;
+            if (ReferenceEquals(logEntryModelB, null)) return false;
+            if (ReferenceEquals(logEntryModelA, null)) return false;
 
-            return (logEntryA.Equals(logEntryB));
+            return (logEntryModelA.Equals(logEntryModelB));
         }
 
-        public static bool operator !=(LogEntry logEntryA, LogEntry logEntryB)
+        public static bool operator !=(LogEntryModel logEntryModelA, LogEntryModel logEntryModelB)
         {
-            if (ReferenceEquals(logEntryA, null)) return false;
+            if (ReferenceEquals(logEntryModelA, null)) return false;
 
-            return !(logEntryA == logEntryB);
+            return !(logEntryModelA == logEntryModelB);
         }
 
         public override int GetHashCode()

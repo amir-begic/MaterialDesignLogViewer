@@ -18,7 +18,7 @@ namespace MonitoringClient.Services
         _connectionString = BuildConnString();
     }
 
-    public ITable<LogEntry> LogEntry => GetTable<LogEntry>();
+    public ITable<LogEntryModel> LogEntry => GetTable<LogEntryModel>();
     public ITable<LocationModel> Location => GetTable<LocationModel>();
 
     public void RunStoredProcedure<M>(string storedProcedureName, DataParameter[] parameters)

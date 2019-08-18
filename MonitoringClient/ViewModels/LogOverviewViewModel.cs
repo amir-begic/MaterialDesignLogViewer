@@ -20,20 +20,20 @@ namespace MonitoringClient.ViewModels
     public class LogOverviewViewModel : ILogOverviewViewModel
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly IRepositoryBase<LogEntry> _loggingRepository;
+        private readonly IRepositoryBase<LogEntryModel> _loggingRepository;
         private ICommand _refreshLogentriesCommand;
         private ICommand _clearLogEntryCommand;
         private ICommand _addLogEntryCommand;
         private ICommand _showDuplicateEntriesCommand;
 
-        public LogOverviewViewModel(IServiceProvider serviceProvider, IRepositoryBase<LogEntry> loggingRepository)
+        public LogOverviewViewModel(IServiceProvider serviceProvider, IRepositoryBase<LogEntryModel> loggingRepository)
         {
             _loggingRepository = loggingRepository;
             _serviceProvider = serviceProvider;
 
-            LogEntries = new ObservableCollection<LogEntry>
+            LogEntries = new ObservableCollection<LogEntryModel>
             {
-                new LogEntry
+                new LogEntryModel
                 {
                     Hostname = "Host1",
                     Id = 123123,
@@ -43,7 +43,7 @@ namespace MonitoringClient.ViewModels
                     Severity = 4,
                     Timestamp = DateTime.Today
                 },
-                new LogEntry
+                new LogEntryModel
                 {
                     Hostname = "Host2",
                     Id = 12341241,
@@ -55,15 +55,15 @@ namespace MonitoringClient.ViewModels
                 }
             };
             
-            SelectedLogEntry = LogEntries.First();
+            SelectedLogEntryModel = LogEntries.First();
         }
 
         private void ClearLogEntry()
         {
-            if (SelectedLogEntry == null)
+            if (SelectedLogEntryModel == null)
                 return;
 
-            _loggingRepository.ClearByProcedure(SelectedLogEntry.Id);
+            _loggingRepository.ClearByProcedure(SelectedLogEntryModel.Id);
             RefreshLogEntries();
         }
 
@@ -160,7 +160,7 @@ namespace MonitoringClient.ViewModels
                 return _addLogEntryCommand;
             }
         }
-        public ObservableCollection<LogEntry> LogEntries { get; set; }
-        public LogEntry SelectedLogEntry { get; set; }
+        public ObservableCollection<LogEntryModel> LogEntries { get; set; }
+        public LogEntryModel SelectedLogEntryModel { get; set; }
     }
 }

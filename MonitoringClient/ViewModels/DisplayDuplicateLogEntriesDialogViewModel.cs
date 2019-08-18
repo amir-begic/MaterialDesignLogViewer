@@ -17,8 +17,8 @@ namespace MonitoringClient.ViewModels
     }
     public class DisplayDuplicateLogEntriesDialogViewModel : IDisplayDuplicateLogEntriesDialogViewModel
     {
-        private readonly IRepositoryBase<LogEntry> _loggingRepository;
-        public DisplayDuplicateLogEntriesDialogViewModel(IRepositoryBase<LogEntry> loggingRepository)
+        private readonly IRepositoryBase<LogEntryModel> _loggingRepository;
+        public DisplayDuplicateLogEntriesDialogViewModel(IRepositoryBase<LogEntryModel> loggingRepository)
         {
             _loggingRepository = loggingRepository;
             LogEntries = new ObservableCollection<IEntity>();
